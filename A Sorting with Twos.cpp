@@ -4,54 +4,35 @@ void solve()
 {
     int n;
     cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
-    {
+    int a[n + 1];
+    for (int i = 1; i <= n; i++)
         cin >> a[i];
-    }
-    int count = 0;
-    for (int i = 0; i < n - 1; i++)
+    int m = 0, x = 1;
+    while (x <= n)
     {
-        if (a[i] < a[i + 1])
-            count++;
-    }
-    if (count == n - 1)
-    {
-        cout << "YES";
-        // return;
-        }
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (a[i] > a[i + 1])
+        x = pow(2, m);
+        if (a[x] > a[x + 1])
         {
-            int y = abs(a[i] - a[i + 1]);
-            for (int j = i; j >= 0; j--)
+            int y = abs(a[x] - a[x + 1]);
+            for (int i = x; i >= 1; i--)
             {
-                a[j] -= y;
+                if (a[i] >= y)
+                {
+                    a[i] -= y;
+                }
             }
         }
     }
-    count = 0;
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (a[i] < a[i + 1])
-            count++;
-    }
-    if (count == n - 1)
-    {
-        cout << "YES";
-        return;
-    }
-    else
-    {
-        cout << "NO";
-    }
+    for (int i = 1; i <= n; i++)
+        cout << a[i] << " ";
+    cout << endl;
 }
 int main()
 {
     int t;
     cin >> t;
     while (t--)
+    {
         solve();
-    return 0;
+    }
 }
