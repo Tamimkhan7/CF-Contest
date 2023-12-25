@@ -1,25 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main()
-{
-    int s, n, c = 0;
-    cin >> s >> n;
-    int m = n;
-    while (n--)
-    {
+#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
+#define MTK                       \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+typedef long long int ll;
+#define all(x) x.begin(), x.end()
+#define mod 1000000007
+#define pb push_back
+#define pop pop_back()
 
-        int x, y;
-        cin >> x >> y;
-        if (s > x)
+int32_t main()
+{
+    MTK;
+    int s, n;
+    cin >> s >> n;
+    pair<int, int> p[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> p[i].first >> p[i].second;
+    }
+    sort(p, p + n);
+    for (int i = 0; i < n; i++)
+    {
+        if (s <= p[i].first)
         {
-            s += y;
-            c++;
+            cout << "NO" << '\n';
+            return 0;
+        }
+        else
+        {
+            s += p[i].second;
         }
     }
-    // cout << c << endl;
-    // cout << n << endl;
-    if (c == m)
-        cout << "YES" << endl;
-    else
-        cout << "NO" << endl;
+    cout << "YES" << '\n';
 }

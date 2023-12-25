@@ -8,33 +8,29 @@ using namespace std;
 #define mod 1000000007
 typedef long long int ll;
 typedef unsigned long long int llu;
-void solve(ll n, ll k)
-{
-    vector<ll> v, v2, jv;
-    for (int i = 1; i <= n; i++)
-    {
-        if (i % 2 == 0)
-
-            v.push_back(i);
-
-        else
-
-            v2.push_back(i);
-    }
-    ll p, q, w;
-    w = v.size() + v2.size();
-    jv.insert(jv.end(), v2.begin(), v2.end());
-    jv.insert(jv.end(), v.begin(), v.end());
-
-    for (int i = 0; i < w; i++)
-    {
-        cout << jv[k - 1] << endl;
-        break;
-    }
-}
 int main()
 {
-    ll n, k;
-    cin >> n >> k;
-    solve(n, k);
+
+    vector<ll> v, v2, jv;
+    ll k, n, i;
+    cin >> k >> n;
+    for (i = 1; i <= k; i++)
+    {
+        if (i % 2 == 0)
+        {
+            v.push_back(i);
+        }
+        else
+        {
+            v2.push_back(i);
+        }
+    }
+    jv.reserve(v.size() + v2.size());
+    jv.insert(jv.end(), v2.begin(), v2.end());
+    jv.insert(jv.end(), v.begin(), v.end());
+    for (i = 0; i < jv.size(); i++)
+    {
+        cout << jv[n - 1] << endl;
+        break;
+    }
 }
