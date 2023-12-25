@@ -12,4 +12,7 @@ int32_t main()
 {
     MTK;
     cout << "Hello world" << '\n';
+
+    std::cout << "test" << std::endl;
+
 }
