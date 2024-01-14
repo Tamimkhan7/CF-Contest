@@ -8,6 +8,36 @@ using namespace std;
 #define mod 1000000007
 typedef long long int ll;
 typedef unsigned long long int llu;
+void solve(int n, int a[])
+{
+    int flag = 0, sum = 0;
+
+    for (int i = 0; i < n-1; i++)
+    {
+        sum += a[i];
+        if (a[i] == a[i + 1])
+            flag++;
+    }
+    if (sum == 0)
+    {
+        cout << 0 << '\n';
+        return;
+    }
+    if (flag == n - 1)
+    {
+        cout << -1 << '\n';
+        return;
+    }
+    // sort(a, a + n);
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] != a[i + 1])
+        {
+            cout << i + 2 << '\n';
+            return;
+        }
+    }
+}
 int main()
 {
     faster;
@@ -17,29 +47,10 @@ int main()
     {
         int n;
         cin >> n;
-        int arr[n];
+        int a[n];
         for (int i = 0; i < n; i++)
-        {
-            cin >> arr[i];
-        }
+            cin >> a[i];
 
-        for (int i = 0; i < n; i++)
-        {
-            int l = sizeof(arr) / sizeof(int);
-            if (arr[i] == 0 && arr[i + 1] == 0)
-            {
-                cout << 0 << endl;
-            }
-            else if (arr[i] == arr[i + 1] && l == 1)
-            {
-                cout << -1 << endl;
-                break;
-            }
-            else if (arr[i] != arr[i + 1])
-            {
-                cout << i + 1 << endl;
-                break;
-            }
-        }
+        solve(n, a);
     }
 }
