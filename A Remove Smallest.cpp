@@ -1,32 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main()
+#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
+#define MTK                       \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+typedef long long int ll;
+#define all(x) x.begin(), x.end()
+#define mod 1000000007
+int32_t main()
 {
+    MTK;
     int t;
     cin >> t;
     while (t--)
     {
-        int n, k;
+        int n;
         cin >> n;
-        int arr[n];
+        vector<int> v(n);
         for (int i = 0; i < n; i++)
+            cin >> v[i];
+        sort(all(v));
+        int ans = 0;
+        for (int i = 0; i < n - 1; i++)
         {
-            cin >> arr[i];
-        }
-        int c = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (i < n - 1)
+            if (v[i] == v[i + 1])
             {
-                k = (arr[i + 1] - arr[i]);
-                if (k > 1)
-                    c++;
+                ans++;
+            }
+            else if ((abs(v[i] - v[i + 1])) <= 1)
+            {
+                ans++;
             }
         }
-        // cout << c << endl;
-        if (c == 0)
-            cout << "YES" << endl;
+        if (ans == n - 1)
+            cout << "YES" << '\n';
         else
-            cout << "NO" << endl;
+            cout << "NO" << '\n';
     }
 }
