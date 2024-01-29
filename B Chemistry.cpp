@@ -5,7 +5,7 @@ using namespace std;
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
     cout.tie(0);
-#define sq(x) (x) * (x*x)
+#define sq(x) (x) * (x * x)
 #define PI acos(-1.0)
 #define all(x) x.begin(), x.end()
 #define mod 1000000007
@@ -24,41 +24,24 @@ void solve()
 {
     int n, k;
     cin >> n >> k;
-    string s, x;
+    string s, x, ss;
     cin >> s;
-    for (int i = 0; i < n; i++)
+    int ans = k / 2 + (k % 2);
+    int res = k / 2;
+
+    for (int i = ans; i < n - res; i++)
     {
-        for (int j = i; j < n; j++)
-        {
-            int res = n - k;
-            string xx;
-            for (int k = i; k <= j; k++)
-            {
-                x = s[k];
-                cout << x;
-                // v.pb(x);
-            }
-            cout << endl;
-            if (res == x.size())
-            {
-                int count = 0;
-                xx = x;
-                reverse(xx.begin(), xx.end());
-                for (int i = 0; i < res; i++)
-                {
-                    if (xx[i] == x[i])
-                        count++;
-                }
-                if (count == res)
-                {
-                    cout << "YES" << endl;
-                    return;
-                }
-            }
-        }
+        ss += s[i];
     }
-    cout << "NO" << endl;
+    // cout << ss << '\n';
+    string xp = ss;
+    reverse(all(ss));
+    if (xp == ss)
+        cout << "YES" << '\n';
+    else
+        cout << "NO" << '\n';
 }
+
 int main()
 {
     faster;

@@ -35,3 +35,4 @@ int32_t main()
         cout << sum << '\n';
     }
 }
+// tamim
