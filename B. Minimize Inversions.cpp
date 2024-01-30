@@ -17,29 +17,21 @@ int32_t main()
     {
         int n;
         cin >> n;
-        int a[n], b[n];
+        ll a[n], b[n];
         for (int i = 0; i < n; i++)
             cin >> a[i];
         for (int i = 0; i < n; i++)
             cin >> b[i];
-
+        map<ll, ll> mp;
         for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < n; j++)
-            {
-                if (b[i] < b[j])
-                {
-                    swap(b[i], b[j]);
-                    swap(a[i], a[j]);
-                    // i = -1;
-                }
-            }
+            mp[a[i]] = b[i];
         }
-        for (int i = 0; i < n; i++)
-            cout << a[i] << ' ';
+        for (auto [x, y] : mp)
+            cout << x << ' ';
         cout << '\n';
-        for (int i = 0; i < n; i++)
-            cout << b[i] << ' ';
+        for (auto [x, y] : mp)
+            cout << y << ' ';
         cout << '\n';
     }
 }
