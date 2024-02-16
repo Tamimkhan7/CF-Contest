@@ -1,34 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long int
-#define llu unsigned long long int
+#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
+#define MTK                       \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+typedef long long int ll;
+#define all(x) x.begin(), x.end()
+#define mod 1000000007
 void solve()
 {
-    int n,q;
-    cin>>n>>q;
-    int a[n+1],b[q+1];
-    for(int i=1; i<=n; i++)cin>>a[i];
-    for(int i=1; i<=q; i++)cin>>b[i];
-
-    for(int i=1; i<=q; i++)
+    int n, q;
+    cin >> n >> q;
+    vector<int> a(n), b(n);
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    for (int i = 0; i < q; i++)
+        cin >> b[i];
+    // sort(all(b), greater<int>());
+    for (int i = 0; i < q; i++)
     {
-        ll ans = pow(2, b[i]);
-        ll res = pow(2, b[i]-1);
-        for(int j=1; j<=n; j++)
+        int ans = b[i] * b[i];
+        int res = ans / 2;
+        for (int j = 0; j < n; j++)
         {
-            if(a[j]%ans==0&&a[j]>=ans)
+            if (a[j] % ans == 0)
             {
-                a[j]+=res;
+                a[j] += res;
             }
         }
     }
-    for(int i=1; i<=n; i++)cout<<a[i]<<" ";
-    cout<<endl;
-
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
+    cout << '\n';
 }
-int main()
+int32_t main()
 {
+    MTK;
     int t;
-    cin>>t;
-    while(t--)solve();
+    cin >> t;
+    while (t--)
+        solve();
 }
