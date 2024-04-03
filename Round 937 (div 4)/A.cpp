@@ -5,10 +5,10 @@ using namespace std;
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
     cout.tie(0);
-typedef long long int ll;
+#define mem(a, b) memset(a, b, sizeof(a))
 #define all(x) x.begin(), x.end()
+typedef long long int ll;
 #define mod 1000000007
-
 int32_t main()
 {
     MTK;
@@ -25,4 +25,5 @@ int32_t main()
         else
             cout << "NONE" << '\n';
     }
+    return 0;
 }
