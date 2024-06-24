@@ -1,81 +1,56 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define MTK                       \
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
     cout.tie(0);
-#define ll long long
-
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
-
-bool isValid(int x, int y, int n, int m)
-{
-    return x >= 0 && x < n && y >= 0 && y < m;
-}
-
+#define mem(a, b) memset(a, b, sizeof(a))
+#define trace(x) cout << #x << ' ' << x << endl
+#define all(x) (x).begin(), (x).end()
+#define ll int long long
+#define mod 1000000007
+int a[110][110];
 void solve()
 {
     int n, m;
     cin >> n >> m;
-    vector<vector<int>> a(n, vector<int>(m));
-    priority_queue<pair<int, pair<int, int>>> pq;
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i <= n + 1; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
+        for (int j = 0; j <= m + 1; j++)
+            a[i][j] = 0;
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
             cin >> a[i][j];
-            pq.push({a[i][j], {i, j}});
-        }
     }
 
-    while (!pq.empty())
+    for (int i = 1; i <= n; i++)
     {
-        auto current = pq.top();
-        pq.pop();
-        int value = current.first;
-        int x = current.second.first;
-        int y = current.second.second;
-
-        bool isPeak = true;
-        for (int k = 0; k < 4; k++)
+        for (int j = 1; j <= m; j++)
         {
-            int nx = x + dx[k];
-            int ny = y + dy[k];
-            if (isValid(nx, ny, n, m) && a[x][y] <= a[nx][ny])
+            int mx = a[i + 1][j];
+            mx = max(mx, a[i][j + 1]);
+            mx = max(mx, a[i][j - 1]);
+            mx = max(mx, a[i - 1][j]);
+            if (mx > a[i][j])
             {
-                isPeak = false;
-                break;
+                cout << a[i][j] << ' ';
+                continue;
             }
-        }
-
-        if (isPeak)
-        {
-            a[x][y]--;
-            pq.push({a[x][y], {x, y}});
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            cout << a[i][j] << " ";
+            a[i][j] = mx;
+            cout << a[i][j] << ' ';
         }
         cout << '\n';
     }
 }
-
 int32_t main()
 {
     MTK;
     int t;
     cin >> t;
     while (t--)
-    {
         solve();
-    }
+
     return 0;
 }
