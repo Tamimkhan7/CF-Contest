@@ -8,46 +8,36 @@ using namespace std;
 typedef long long int ll;
 #define all(x) x.begin(), x.end()
 #define mod 1000000007
-void solve()
+bool solve()
 {
     int n, f, a, b;
     cin >> n >> f >> a >> b;
-    vector<int> v(n);
-    for (int i = 0; i < n; i++)
+    vector<int> v(n + 1);
+    for (int i = 1; i <= n; i++)
         cin >> v[i];
-    int mn;
-    for (int i = 0; i < n - 1; i++)
+    ll pre = 0;
+    for (int i = 1; i <= n; i++)
     {
-        if (v[i] >= v[i + 1])
-        {
-            cout << "NO" << '\n';
-            return;
-        }
+        if (f <= 0)
+            return false;
+        ll p = (v[i] - pre) * a;
+        f -= min(p, 1LL * b);
+        pre = v[i];
     }
-
-    for (int i = 0; i < n; i++)
-    {
-
-        int x = (v[i] - v[i - 1]) * a;
-        if (x > 0)
-            mn = min(x, b);
-        else
-            mn = b;
-        f -= mn;
-    }
-    // cout << f << '\n';
-    if (f > 0)
-        cout << "YES" << '\n';
-    else
-        cout << "NO" << '\n';
+    return (f > 0);
 }
+
 int32_t main()
 {
     MTK;
     int t;
     cin >> t;
     while (t--)
-    {
-        solve();
-    }
+        cout << (solve() ? "YES" : "NO") << '\n';
 }
+
+/* ll ans = 1LL * n * b;
+    if ((ans <= f and a < b) || ans < f)
+        cout << "YES" << '\n';
+    else
+        cout << "NO" << '\n';*/
