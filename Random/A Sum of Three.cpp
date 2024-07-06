@@ -5,32 +5,21 @@ using namespace std;
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
     cout.tie(0);
-typedef long long int ll;
-typedef unsigned long long int llu;
+
 void solve()
 {
     int n;
     cin >> n;
-    for (int i = 1; i <= n; i++)
+    if (n < 7 || n == 9)
+        cout << "NO" << '\n';
+    else
     {
-        for (int j = i + 1; j <= n; j++)
-        {
-            for (int k = j + 1; k <= n; k++)
-            {
-                ll x = i + j + k;
-                if (i % 3 != 0 && j % 3 != 0 && k % 3 != 0)
-                {
-                    if (x == n)
-                    {
-                        cout << "YES" << endl;
-                        cout << i << " " << j << " " << k << endl;
-                        return;
-                    }
-                }
-            }
-        }
+        cout << "YES" << '\n';
+        if ((n - 3) % 3 == 0)
+            cout << 1 << ' ' << 4 << ' ' << n - 5 << '\n';
+        else
+            cout << 1 << ' ' << 2 << ' ' << n - 3 << '\n';
     }
-    cout << "NO" << endl;
 }
 int main()
 {

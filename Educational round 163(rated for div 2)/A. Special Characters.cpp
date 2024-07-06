@@ -5,15 +5,28 @@ using namespace std;
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
     cout.tie(0);
-void solve(){
-int n;cin>>n;
-if(n>1)
+void solve()
 {
-cout<<"YES"<<'\n';
-for(int i=0; i<n; i++)cout<<'A';
-cout<<'\n';
-}
-else cout<<"NO"<<'\n';
+    int n;
+    cin >> n;
+    if (n % 2)
+    {
+        cout << "NO" << '\n';
+        return;
+    }
+    string s = "";
+    while (n > 0)
+    {
+        s += "AA";
+        n -= 2;
+        if (n > 0)
+        {
+            s += "BB";
+            n -= 2;
+        }
+    }
+    cout << "YES" << '\n';
+    cout << s << '\n';
 }
 int main()
 {
@@ -21,6 +34,6 @@ int main()
     int t;
     cin >> t;
     while (t--)
-    solve();
+        solve();
     return 0;
 }
