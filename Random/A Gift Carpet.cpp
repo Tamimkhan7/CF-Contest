@@ -16,95 +16,50 @@ typedef unsigned long long int llu;
 #define len(a) sizeof(a)
 #define lc (n * 2)
 #define rc ((n * 2) + 1)
-void solve()
-{
-    int n, m;
-    cin >> n >> m;
-    string s, ss, h, p, r;
-    while (n--)
-    {
-        cin >> s;
-        ss += s;
-    }
-    int len = ss.size();
-    int a = 0, b = 0, c = 0, d = 0, f = 0;
-    for (int i = 0; i < len; i++)
-    {
-        if (ss[i] == 'v' || ss[i] == 'i' || ss[i] == 'k' || ss[i] == 'a')
-            h += ss[i];
-    }
-    set<string> sp;
 
-    for (int i = 0; i < h.size(); i++)
-    {
-        r = h[i];
-        sp.insert(r);
-    }
-    cout << sp.size() << endl;
-
-    // for (int i = 0; i < len; i++)
-    // {
-    //     if (ss[i] == 'v')
-    //     {
-    //         if (a == 0 && b == 0 && c == 0 && d == 0)
-    //         {
-    //             p += ss[i];
-    //             a++;
-    //         }
-    //     }
-    //     else if (ss[i] == 'i')
-    //     {
-    //         if (b == 0 && a == 1 && c == 0 && d == 0)
-    //         {
-    //             p += ss[i];
-    //             b++;
-    //         }
-    //     }
-    //     else if (ss[i] == 'k')
-    //     {
-    //         cout << a << b << c << d << endl;
-    //         if (c == 0 && a == 1 && b == 1 && d == 0)
-    //         {
-    //             p += ss[i];
-    //             c++;
-    //         }
-    //         else
-    //         {
-    //             break;
-    //         }
-    //     }
-    //     else if (ss[i] == 'a')
-    //     {
-    //         if (d == 0 && a == 1 && b == 1 && c == 1)
-    //         {
-    //             p += ss[i];
-    //             d++;
-    //         }
-    //     }
-    // }
-    // cout << p << endl;
-    // int c = 0;
-
-    // for (int i = 0; i < 1; i++)
-    // {
-    //     if (sss[i] != sss[i + 1] && sss[i] != sss[i + 2] && sss[i] != sss[i + 3] && sss[i + 1] != sss[i + 2] && sss[i + 1] != sss[i + 3] && sss[i + 2] != sss[i + 3])
-    //     {
-    //         c++;
-    //         break;
-    //     }
-    // }
-    // if (c == 1)
-    //     cout << "YES" << endl;
-    // else
-    //     cout << "NO" << endl;
-}
 int main()
 {
     int t;
     cin >> t;
     while (t--)
     {
-        solve();
+        int n, m;
+        cin >> n >> m;
+        char s[n][m];
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+                cin >> s[i][j];
+        }
+
+        bool v = false, x = false, k = false, a = false;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (s[i][j] == 'v' and v == false)
+                {
+                    v = true;
+                    break;
+                }
+                if (v == true and s[i][j] == 'i' and x == false)
+                {
+                    x = true;
+                    break;
+                }
+                if (x == true and s[i][j] == 'k' and k == false)
+                {
+                    k = true;
+                    break;
+                }
+                if (k == true and s[i][j] == 'a' and a == false)
+                {
+                    cout << "YES" << '\n';
+                    return 0;
+                }
+            }
+        }
+        cout << "NO" << '\n';
     }
     return 0;
 }
