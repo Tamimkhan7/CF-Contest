@@ -1,65 +1,70 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
-#define faster                    \
+#define MTK                       \
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
     cout.tie(0);
-#define sq(x) (x) * (x)
-#define PI acos(-1.0)
-#define all(x) x.begin(), x.end()
+#define mem(a, b) memset(a, b, sizeof(a))
+#define trace(x) cout << #x << ' ' << x << endl
+#define all(x) (x).begin(), (x).end()
+#define ll int long long
 #define mod 1000000007
-typedef long long int ll;
-typedef unsigned long long int llu;
-#define pb push_back
-#define pop pop_back()
-#define len(a) sizeof(a)
-#define lc (n * 2)
-#define rc ((n * 2) + 1)
 
-int main()
+int32_t main()
 {
+    MTK;
     int t;
     cin >> t;
     while (t--)
     {
         int n, m;
         cin >> n >> m;
-        char s[n][m];
+        string s, ss;
         for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < m; j++)
-                cin >> s[i][j];
+            cin >> s;
+            ss += s;
         }
-
-        bool v = false, x = false, k = false, a = false;
+        bool flag = true;
+        int cnt = 0;
         for (int i = 0; i < n; i++)
         {
+            bool ok = false;
             for (int j = 0; j < m; j++)
             {
-                if (s[i][j] == 'v' and v == false)
+                char c = s[i * m];
+                if (i == 0 and c == 'v')
                 {
-                    v = true;
+                    ok = true;
                     break;
                 }
-                if (v == true and s[i][j] == 'i' and x == false)
+                else if (i == 1 and c == 'i')
                 {
-                    x = true;
+                    ok = true;
                     break;
                 }
-                if (x == true and s[i][j] == 'k' and k == false)
+                else if (i == 2 and c == 'k')
                 {
-                    k = true;
+                    ok = true;
                     break;
                 }
-                if (k == true and s[i][j] == 'a' and a == false)
+                else if (i == 3 and c == 'a')
                 {
-                    cout << "YES" << '\n';
-                    return 0;
+                    ok = true;
+                    break;
                 }
             }
+            if (ok)
+                cnt++;
+            if (!ok)
+                flag = false;
         }
-        cout << "NO" << '\n';
+        cout << cnt << ' ';
+        cout << '\n';
+        if (flag)
+            cout << "YES" << '\n';
+        else
+            cout << "NO" << '\n';
     }
     return 0;
 }
