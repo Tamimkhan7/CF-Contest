@@ -19,39 +19,18 @@ int32_t main()
     {
         int n, x;
         cin >> n >> x;
-        vector<int> v(n), ans;
-
-        for (int i = 0; i < n; i++)
-            cin >> v[i];
-        sort(v.rbegin(), v.rend());
-        int mx = 0, cnt = 0;
-
-        // if (v[0] / 2 > v[1])
-        // {
-        //     cout << v[0] << '\n';
-        //     continue;
-        // }
+        vector<int> v(n);
+        ll ans = 0;
         for (int i = 0; i < n; i++)
         {
-            if (ans.size() != x)
-                ans.push_back(v[i]);
-            else
-            {
-                // for (auto x : ans)
-                //     cout << x << ' ';
-                // cout << '\n';
-                int mn = *min_element(all(ans));
-                cnt += mn;
-                for (int j = 0; j < ans.size(); j++)
-                {
-                    ans[j] -= mn;
-                                }
-                ans.clear();
-            }
+            cin >> v[i];
+            ans += v[i];
         }
-        if (!ans.empty())
-            cnt += *max_element(all(ans));
-        cout << cnt << '\n';
+
+        int mx = *max_element(all(v));
+        ans = (ans + x - 1) / x;
+        // cout << ans << ' ' << mx << '\n';
+        cout << max(ans, 1LL * mx) << '\n';
     }
     return 0;
 }

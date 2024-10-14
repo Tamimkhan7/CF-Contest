@@ -23,38 +23,24 @@ int32_t main()
         for (int i = 0; i < n; i++)
             cin >> v[i];
         sort(v.rbegin(), v.rend());
-        int ans = 0, cnt = 0;
-        for (int i = 0; i < v.size(); i++)
+        int ans = 0, left = 0;
+        for (int i = 0; i < n; i++)
         {
-
-            if (r > 0)
+            if (r >= v[i] / 2)
             {
-                // cout << v[i] << '\n';
-                if (v.size() - 2 == i and v[i] == 1 and v[i + 1] == 1 and r < 2)
-                    break;
-                else if (v[i] % 2 == 0)
-                {
-                    ans += v[i];
-                    r -= v[i] / 2;
-                }
-                else if (v[i] == 1)
-                {
-                    ans += v[i];
-                    r--;
-                }
-                else if (v[i] % 2 != 0 and v[i] != 1)
-                {
-                    ans += v[i] - (v[i] % 2);
-                    r -= v[i] / 2;
-                    v.push_back(1);
-                }
+                ans += (v[i] / 2) * 2;
+                r -= v[i] / 2;
+                left += v[i] % 2;
             }
-            sort(v.rbegin(), v.rend());
-            // for (auto x : v)
-            //     cout << x << ' ';
-            // cout << '\n';
         }
-        // cout << r << ' ' << cnt << '\n';
+        cout << ans << ' ' << r << ' ' << left << '\n';
+        while (left > 1 and r > 1)
+        {
+            ans += 2;
+            left -= 2, r -= 2;
+        }
+        if (r > 0 and left == 1)
+            ans++;
         cout << ans << '\n';
     }
     return 0;
