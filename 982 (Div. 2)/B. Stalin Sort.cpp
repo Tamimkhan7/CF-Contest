@@ -19,28 +19,24 @@ int32_t main()
     {
         int n;
         cin >> n;
+        vector<int> v(n);
+        int mx = 0;
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
 
-        map<ll, int> pref_sum;
-        pref_sum[0] = 1;
-        ll sum = 0;
-        int cnt = 0, r = 0;
-
+        int ans = 1e9;
         for (int i = 0; i < n; i++)
         {
-            int x;
-            cin >> x;
-            sum += x;
-            if (pref_sum[sum])
+            int cnt = 0;
+            for (int j = i + 1; j < n; j++)
             {
-                cnt++;
-                pref_sum.clear();
-                pref_sum[0] = 1;
-                sum = 0;
+                if (v[i] < v[j])
+                    cnt++;
             }
-            pref_sum[sum]++;
+            ans = min(ans, cnt + i);
         }
-        cout << cnt << '\n';
-    }
 
+        cout << ans << '\n';
+    }
     return 0;
 }

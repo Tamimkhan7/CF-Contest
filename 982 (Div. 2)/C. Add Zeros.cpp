@@ -19,28 +19,27 @@ int32_t main()
     {
         int n;
         cin >> n;
-
-        map<ll, int> pref_sum;
-        pref_sum[0] = 1;
-        ll sum = 0;
-        int cnt = 0, r = 0;
-
+        vector<int> v(n);
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
+        int cnt = 0;
         for (int i = 0; i < n; i++)
         {
-            int x;
-            cin >> x;
-            sum += x;
-            if (pref_sum[sum])
+            int x = (v.size() + 1) - (i + 1);
+            if (x == v[i])
             {
-                cnt++;
-                pref_sum.clear();
-                pref_sum[0] = 1;
-                sum = 0;
+                // cout << x << ' ' << v[i] << '\n';
+                int p = i;
+                while (p--)
+                    v.push_back(0);
             }
-            pref_sum[sum]++;
+            if (cnt != 0)
+            {
+                i = -1;
+                cnt = 0;
+            }
         }
-        cout << cnt << '\n';
+        cout << v.size() << '\n';
     }
-
     return 0;
 }

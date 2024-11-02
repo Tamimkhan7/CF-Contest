@@ -19,28 +19,15 @@ int32_t main()
     {
         int n;
         cin >> n;
-
-        map<ll, int> pref_sum;
-        pref_sum[0] = 1;
-        ll sum = 0;
-        int cnt = 0, r = 0;
-
-        for (int i = 0; i < n; i++)
+        int l = 0, r = 0;
+        while (n--)
         {
-            int x;
-            cin >> x;
-            sum += x;
-            if (pref_sum[sum])
-            {
-                cnt++;
-                pref_sum.clear();
-                pref_sum[0] = 1;
-                sum = 0;
-            }
-            pref_sum[sum]++;
+            int x, y;
+            cin >> x >> y;
+            l = max(x, l);
+            r = max(y, r);
         }
-        cout << cnt << '\n';
+        cout << 2 * (l + r) << '\n';
     }
-
     return 0;
 }
