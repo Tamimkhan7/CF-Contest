@@ -19,58 +19,30 @@ int32_t main()
     {
         int n, m;
         cin >> n >> m;
-        vector<string> tar = {"1543", "5431", "4315", "3154"};
-        vector<vector<char>> a(n + 1, vector<char>(m + 1));
-
-        for (int i = 1; i <= n; i++)
-            for (int j = 1; j <= m; j++)
-                cin >> a[i][j];
+        vector<string> s(n);
+        for (int i = 0; i < n; i++)
+            cin >> s[i];
 
         int cnt = 0;
-        for (int i = 1; i <= n; i++)
+        for (int i = 0; i < min(n, m) / 2; i++)
         {
-            string s = "";
-            for (int j = i; j <= m - i + 1; j++)
-                s += a[i][j];
-            for (int j = i + 1; j <= n - i; j++)
-                s += a[j][m - i + 1];
-            for (int j = m - i + 1; j >= i; j--)
-                s += a[n - i + 1][j];
-            for (int j = n - i; j > i; j--)
-                s += a[j][i];
-            // cout << s << '\n';
-            string ss = "";
-            for (int i = 0; i < 3; i++)
-                ss += s[i];
+            string ss;
+            for (int j = i; j < m - i - 1; j++)
+                ss += s[i][j];
+            for (int j = i; j < n - i - 1; j++)
+                ss += s[j][m - i - 1];
 
-            bool flag = false;
-            if (s.size() >= 4)
-            {
-                for (int k = 0; k <= s.size() - 4; k++)
-                {
-                    string sub = s.substr(k, 4);
-                    if (find(all(tar), sub) != tar.end())
-                    {
-                        if (k == 0)
-                            flag = true;
-                        cnt++;
-                        k += 3;
-                    }
-                }
-            }
-            if (!flag)
-                s += ss;
-            // cout << s << '\n';
+            for (int j = m - i - 1; j > i; j--)
+                ss += s[n - i - 1][j];
 
-            // reverse(all(s));
-            for (int k = (int)s.size() - 5; k <= s.size(); k++)
+            for (int j = n - i - 1; j > i; j--)
+                ss += s[j][i];
+            ss += ss;
+            // cout << ss << '\n';
+            for (int i = 0; i < ss.size() / 2; i++)
             {
-                string sub = s.substr(k, 4);
-                if (find(all(tar), sub) != tar.end())
-                {
+                if (ss.substr(i, 4) == "1543")
                     cnt++;
-                    k += 3;
-                }
             }
         }
         cout << cnt << '\n';
