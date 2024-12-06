@@ -25,20 +25,13 @@ void solve()
         int x = s[i] - '0';
         sum += x;
         sum %= 9;
-        // if (sum % 9 == 0)
-        // {
-        //     cout << "YES" << '\n';
-        //     return;
-        // }
     }
-    // show(sum);
 
     if (sum % 9 == 0)
     {
         cout << "YES" << '\n';
         return;
     }
-    bool ok = false;
 
     for (int i = 0; i < two; i++)
     {
@@ -50,20 +43,26 @@ void solve()
             return;
         }
     }
+    // sum += 9;
+    // sum %= 9;
     ll remtwo = min((ll)2, two);
-    show(remtwo);
-    while (three > 0 and !ok)
+    // show(remtwo);
+
+    for (ll i = 0; i < three; i++)
     {
         sum += 6;
         sum %= 9;
-        if (sum % 9 == 0)
+        for (ll j = 0; j <= remtwo; j++)
         {
-            cout << "YES" << '\n';
-            return;
-        }
-        three--;
-    }
+            ll tem = sum - 2 * j;
 
+            if (tem % 9 == 0)
+            {
+                cout << "YES" << '\n';
+                return;
+            }
+        }
+    }
     cout << "NO" << '\n';
 }
 
