@@ -13,19 +13,14 @@ int main()
     cin >> t;
     while (t--)
     {
-        ll m, a, b, c;
+        int m, a, b, c;
         cin >> m >> a >> b >> c;
-
-        ll row1_seated = min(a, m);
-        ll row2_seated = min(b, m);
-
-        ll remaining_row1 = m - row1_seated;
-        ll remaining_row2 = m - row2_seated;
-
-        ll seated_from_c = min(c, remaining_row1 + remaining_row2);
-
-        ll total_seated = row1_seated + row2_seated + seated_from_c;
-        cout << total_seated << endl;
+        int rw1 = min(m, a);
+        int rw2 = min(m, b);
+        int rw1_rem = m - rw1;
+        int rw2_rem = m - rw2;
+        int xx = min(c, rw1_rem + rw2_rem);
+        cout << rw1 + rw2 + xx << '\n';
     }
     return 0;
 }
