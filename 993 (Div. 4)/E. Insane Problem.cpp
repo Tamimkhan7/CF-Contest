@@ -25,7 +25,7 @@ int32_t main()
             int r = r2 / p;
             int l = (l2 - 1) / p + 1;
             ll res = max(0, min(r1, r) - max(l1, l) + 1);
-            show(r), show(l), show(res);
+            // show(r), show(l), show(res);
             ans += res;
         }
         cout << ans << '\n';
