@@ -17,18 +17,21 @@ int32_t main()
     cin >> t;
     while (t--)
     {
-        int n, k;
-        cin >> n >> k;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
-            cin >> v[i];
-        vector<int> sub;
-        for (int i = 0; i < n; i++)
+        string s;
+        cin >> s;
+        bool ok = false;
+        for (int i = 0; i < (int)s.size() - 1; i++)
         {
-            for (int j = i; j < n; j++)
+            if (s[i] == s[i + 1])
             {
+                ok = true;
+                break;
             }
         }
+        if (ok)
+            cout << 1 << '\n';
+        else
+            cout << (int)s.size() << '\n';
     }
     return 0;
 }

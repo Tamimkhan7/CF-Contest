@@ -17,18 +17,12 @@ int32_t main()
     cin >> t;
     while (t--)
     {
-        int n, k;
-        cin >> n >> k;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
-            cin >> v[i];
-        vector<int> sub;
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = i; j < n; j++)
-            {
-            }
-        }
+        string s;
+        cin >> s;
+        s.pop_back();
+        s.pop_back();
+        s += 'i';
+        cout << s << '\n';
     }
     return 0;
 }
