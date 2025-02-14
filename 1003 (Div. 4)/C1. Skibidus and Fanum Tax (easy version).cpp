@@ -19,40 +19,32 @@ int32_t main()
     {
         int n, m;
         cin >> n >> m;
-        vector<int> a(n), b(m);
+        vector<int> a(n);
         for (int i = 0; i < n; i++)
             cin >> a[i];
+        int x;
+        cin >> x;
 
-        for (int i = 0; i < m; i++)
-            cin >> b[i];
-
-        // show(x);
-        if (is_sorted(all(a)))
-        {
-            cout << "YES" << '\n';
-            continue;
-        }
-        // for (int i = 0; i < n; i++)
-        //     cout << a[i] << ' ';
-        // cout << '\n';
-        sort(all(b));
         bool ok = true;
-        for (int i = 0; i < n - 1; i++)
+        int val = min(a[0], x - a[0]);
+        //show(val);
+        for (int i = 1; i < n; i++)
         {
-            if (a[i] > a[i + 1])
+            if (min(a[i], x - a[i]) >= val)
+                val = min(a[i], x - a[i]);
+            else if (max(a[i], x - a[i]) >= val)
+                val = max(a[i], x - a[i]);
+            else
             {
-                // cout << a[i] << ' ' << x << ' ' << x - a[i] << '\n';
-                a[i] = b[0] - a[i];
-                if (i > 0 and a[i] < a[i - 1])
-                {
-                    ok = false;
-                    break;
-                }
+                ok = false;
+                break;
             }
+            //cout << a[i] << ' ' << val << '\n';
         }
         // for (int i = 0; i < n; i++)
         //     cout << a[i] << ' ';
         // cout << '\n';
+
         if (ok)
             cout << "YES" << '\n';
         else
