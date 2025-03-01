@@ -24,44 +24,33 @@ int32_t main()
             cin >> v[i];
         vector<int> vv(all(v));
         ll ans = 0, res = 0;
-        reverse(all(vv));
-        // for (auto x : vv)
-        //     cout << x << ' ';
-        // cout << '\n';
-        int pos = 0;
-        bool ok = false;
+        while (!vv.empty() and vv.front() > 0)
+        {
+            ans += vv.front();
+            vv.erase(vv.begin());
+        }
+        while (!vv.empty() and vv.back() < 0)
+        {
+            ans += abs(vv.back());
+            vv.pop_back();
+        }
+        ll sub_array_max = 0, sum = 0, sum2 = 0;
         for (int i = 0; i < n; i++)
         {
-            if (vv[i] < 0)
+            if (v[i] < 0)
             {
-                if (ok)
-                {
-                    res = max(ans, res);
-                    ans = 0;
-                    ok = false;
-                }
-                ans += abs(vv[i]);
+                sum2 = 0;
+                sum += abs(v[i]);
+                sub_array_max = max(sum, sub_array_max);
             }
             else
             {
-                ans += vv[i];
-                ok = true;
+                sum = 0;
+                sum2 += v[i];
+                sub_array_max = max(sum2, sub_array_max);
             }
         }
-        res = max(ans, res);
-        // show(ans);
-        // show(pos);
-        // if (ok)
-        //     pos++;
-        // // vv.erase(vv.begin(), vv.begin() + pos);
-        // for (int i = pos; i < (int)vv.size(); i++)
-        // {
-        //     if (vv[i] > 0)
-        //         ans += vv[i];
-        //     else
-        //         break;
-        // }
-        cout << res << '\n';
+        cout << max(ans, sub_array_max) << '\n';
     }
     return 0;
 }
