@@ -20,70 +20,75 @@ int32_t main()
         string p, s;
         cin >> p >> s;
 
-        int l = 0, r = 0, k = 0;
-        vector<pair<char, int>> left, right;
-
-        // show(p), show(s);
+        vector<pair<char, int>> v, vv;
+        int cnt = 0, cnt2 = 0;
         for (int i = 0; i < (int)p.size(); i++)
         {
-            if (p[i] == 'L')
+            if (p[i] == 'R')
             {
-                l++;
-                if (r != 0)
-                    left.push_back({'R', r});
-                r = 0;
+                if (cnt2 > 0)
+                    v.push_back({'L', cnt2});
+                cnt2 = 0;
+                cnt++;
             }
             else
             {
-                r++;
-                if (l != 0)
-                    left.push_back({'L', l});
-                l = 0;
+                if (cnt > 0)
+                    v.push_back({'R', cnt});
+                cnt = 0;
+                cnt2++;
             }
         }
-        if (r != 0)
-            left.push_back({'R', r});
-        if (l != 0)
-            left.push_back({'L', l});
+        if (cnt > 0)
+            v.push_back({'R', cnt});
+        if (cnt2 > 0)
+            v.push_back({'L', cnt2});
 
-        l = 0, r = 0;
+        cnt = 0, cnt2 = 0;
         for (int i = 0; i < (int)s.size(); i++)
         {
-            if (s[i] == 'L')
+            if (s[i] == 'R')
             {
-                l++;
-                if (r != 0)
-                    right.push_back({'R', r});
-                r = 0;
+                if (cnt2 > 0)
+                    vv.push_back({'L', cnt2});
+                cnt2 = 0;
+                cnt++;
             }
             else
             {
-                r++;
-                if (l != 0)
-                    right.push_back({'L', l});
-                l = 0;
+                if (cnt > 0)
+                    vv.push_back({'R', cnt});
+                cnt = 0;
+                cnt2++;
             }
         }
-        if (r != 0)
-            right.push_back({'R', r});
-        if (l != 0)
-            right.push_back({'L', l});
+        if (cnt > 0)
+            vv.push_back({'R', cnt});
+        if (cnt2 > 0)
+            vv.push_back({'L', cnt2});
 
-        // for (auto [x, y] : left)
+        // for (auto [x, y] : v)
         //     cout << x << ' ' << y << '\n';
-
         // cout << '\n';
-        // for (auto [x, y] : right)
+        // for (auto [x, y] : vv)
         //     cout << x << ' ' << y << '\n';
 
         bool ok = true;
-        for (int i = 0; i < min((int)left.size(), (int)right.size()); i++)
+        if (vv.size() != v.size())
         {
-            if (right[i].first == left[i].first and right[i].second >= left[i].second and right[i].second <= (left[i].second * 2))
+            cout << "NO\n";
+            continue;
+        }
+        // cout << "abc\n";
+        for (int i = 0; i < (int)v.size(); i++)
+        {
+            char v_a = v[i].first, vv_a = vv[i].first;
+            int v_b = v[i].second, vv_b = vv[i].second;
+            // show(v_a), show(vv_a), show(v_b), show(vv_b);
+            if (v_a == vv_a and (v_b <= vv_b and v_b * 2 >= vv_b))
                 continue;
             else
             {
-                // show(i);
                 ok = false;
                 break;
             }
