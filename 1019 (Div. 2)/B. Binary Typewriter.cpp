@@ -10,6 +10,144 @@ using namespace std;
 #define ll int long long
 #define mod 1000000007
 
+void solve()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+    vector<pair<char, int>> v;
+    int cnt = 0, cnt2 = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '0')
+        {
+            if (cnt2 > 0)
+                v.push_back({'1', cnt2});
+            cnt2 = 0;
+            cnt++;
+        }
+        else
+        {
+            if (cnt > 0)
+                v.push_back({'0', cnt});
+            cnt = 0;
+            cnt2++;
+        }
+    }
+    if (cnt > 0)
+        v.push_back({'0', cnt});
+    if (cnt2 > 0)
+        v.push_back({'1', cnt2});
+    int idx = 0, mx_val = 0;
+    char ch;
+    for (int i = 0; i < (int)v.size(); i++)
+    {
+        int x = v[i].second;
+        if (x > mx_val)
+        {
+            mx_val = x;
+            ch = v[i].first;
+            idx = i;
+        }
+    }
+    // for (auto [x, y] : v)
+    //     cout << x << ' ' << y << '\n';
+    // cout << '\n';
+
+    // show(mx_val), show(idx);
+    //cout << '\n';
+    int idx2 = -1, mx_val2 = 0;
+    for (int i = idx - 1; i >= 0; i--)
+    {
+        if (v[i].first == ch and mx_val2 < v[i].second)
+        {
+            mx_val2 = v[i].second;
+            idx2 = i;
+        }
+    }
+    for (int i = idx + 1; i < (int)v.size(); i++)
+    {
+        if (v[i].first == ch and mx_val2 < v[i].second)
+        {
+            mx_val2 = v[i].second;
+            idx2 = i;
+        }
+    }
+    // show(mx_val2), show(idx2);
+    int idx_a = idx, idx_b = idx2;
+    bool ok = true;
+    if (idx < idx2 and idx2 > -1)
+    {
+        idx++;
+        swap(v[idx], v[idx2]);
+    }
+    if (idx > idx2 and idx2 > -1)
+    {
+        idx--;
+        swap(v[idx], v[idx2]);
+    }
+    else
+        ok = false;
+
+    // for (auto [x, y] : v)
+    //     cout << x << ' ' << y << '\n';
+    // cout << '\n';
+
+    int ans = 0, ans2 = 0;
+    ch = '0';
+    for (auto [x, y] : v)
+    {
+        if (x == ch)
+            ans += y;
+        else
+        {
+            ans += (y + 1);
+            ch = x;
+        }
+    }
+    if (!ok)
+    {
+        reverse(all(v));
+        ch = '0';
+        for (auto [x, y] : v)
+        {
+            if (x == ch)
+                ans2 += y;
+            else
+            {
+                ans2 += (y + 1);
+                ch = x;
+            }
+        }
+        cout << min(ans, ans2) << '\n';
+        return;
+    }
+
+    if (idx_a < idx_b and idx_b > -1)
+    {
+        idx_a--;
+        swap(v[idx_a], v[idx_b]);
+    }
+    if (idx_a > idx_b and idx_b > -1)
+    {
+        idx_a++;
+        swap(v[idx_a], v[idx_b]);
+    }
+
+    int ans3 = 0;
+    ch = '0';
+    for (auto [x, y] : v)
+    {
+        if (x == ch)
+            ans3 += y;
+        else
+        {
+            ans3 += (y + 1);
+            ch = x;
+        }
+    }
+    cout << min(ans, ans3) << '\n';
+}
 int32_t main()
 {
     MTK;
@@ -17,110 +155,7 @@ int32_t main()
     cin >> t;
     while (t--)
     {
-        int n;
-        string s;
-        cin >> n >> s;
-
-        char x = '0';
-        int ans = 0;
-        for (auto c : s)
-        {
-            if (c != x)
-            {
-                ans += 2;
-                x = (x == '0' ? '1' : '0');
-            }
-            else
-                ans++;
-        }
-        
-        int first_mx = 0, last_mx = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (s[i] == '0')
-                first_mx++;
-            else if (first_mx > 0 and s[i] != '0')
-                break;
-        }
-        for (int i = n - 1; i >= 0; i--)
-        {
-            if (s[i] == '0')
-                last_mx++;
-            else if (last_mx > 0 and s[i] != '0')
-                break;
-        }
-
-
-        show(first_mx), show(last_mx);
-        bool ok = false;
-        if (first_mx >= last_mx)
-        {
-            int idx = 0, pre = 0;
-            for (int i = 0; i < n; i++)
-            {
-                if (s[i] == '0')
-                {
-                    int cnt = 0;
-                    for (int j = i; j < n; j++)
-                    {
-                        if (s[j] == '0')
-                            cnt++;
-                        else
-                            break;
-                        if (cnt > pre)
-                        {
-                            idx = i;
-                            pre = cnt;
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-        }
-
-        int idx2 = 0;
-        pre = 0;
-        for (int i = sesh + 1; i < n; i++)
-        {
-            if (s[i] == '0')
-            {
-                int cnt = 0;
-                for (int j = i; j < n; j++)
-                {
-                    if (s[j] == '0')
-                        cnt++;
-                    else
-                        break;
-                    if (cnt > pre)
-                    {
-                        idx2 = j;
-                        pre = cnt;
-                    }
-                }
-            }
-        }
-
-        reverse(s.begin() + idx, s.begin() + idx2);
-
-        show(s);
-
-        int ans2 = 0;
-        x = '0';
-        for (auto c : s)
-        {
-            if (c != x)
-            {
-                ans2 += 2;
-                x = (x == '0' ? '1' : '0');
-            }
-            else
-                ans2++;
-        }
-
-        // cout << min(ans, min(ans3, ans2)) << '\n';
-
-        return 0;
+        solve();
     }
+    return 0;
 }
