@@ -25,29 +25,14 @@ int32_t main()
             cin >> a[i];
         for (int i = 1; i <= n; i++)
             cin >> b[i];
-        // yes or no
-        vector<vector<ll>> dp(n + 1, vector<ll>(2, 0));
-        dp[1][0] = 1;
-        dp[1][1] = 1;
 
+        int ans = 2;
         for (int i = 2; i <= n; i++)
         {
-            if (a[i - 1] <= a[i] and b[i - 1] <= b[i])
-                dp[i][0] = (dp[i][0] + dp[i - 1][0]) % MOD;
-
-            if (a[i - 1] <= b[i] and b[i - 1] <= a[i])
-                dp[i][1] = (dp[i][1] + dp[i - 1][0]) % MOD;
-
-            if (b[i - 1] <= a[i] and a[i - 1] <= b[i])
-
-                dp[i][0] = (dp[i][0] + dp[i - 1][1]) % MOD;
-
-            if (b[i - 1] <= b[i] and a[i - 1] <= a[i])
-                dp[i][1] = (dp[i][1] + dp[i - 1][1]) % MOD;
+            if (max(a[i - 1], b[i - 1]) <= min(a[i], b[i]))
+                ans = (1LL * ans * 2) % MOD;
         }
-
-        ll ans = (dp[n][0] + dp[n][1]) % MOD;
-        cout << ans << "\n";
+        cout << ans << '\n';
     }
     return 0;
 }
